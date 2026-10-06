@@ -9,24 +9,24 @@ namespace DragonInTheDark
             char[,] Cavern,
             Boolean DragonAwake)
         {
-            int Count1;
-            int Count2;
+            int X;
+            int Y;
 
-            for (Count1 = 0; Count1 < MAP_HEIGHT; Count1++)
+            for (Y = 0; Y < MAP_HEIGHT; Y++)
             {
                 Console.WriteLine(
                     "  --------------------------- ");
 
-                for (Count2 = 0; Count2 < MAP_WIDTH; Count2++)
+                for (X = 0; X < MAP_WIDTH; X++)
                 {
                     if (
-                        Cavern[Count1, Count2] == ' ' ||
-                        Cavern[Count1, Count2] == '*' ||
-                        (Cavern[Count1, Count2] == 'D' &&
+                        Cavern[X, Y] == ' ' ||
+                        Cavern[X, Y] == '*' ||
+                        (Cavern[X, Y] == 'D' &&
                          DragonAwake))
                     {
                         Console.Write(
-                            " | " + Cavern[Count1, Count2]);
+                            " | " + Cavern[X, Y]);
                     }
                     else
                     {

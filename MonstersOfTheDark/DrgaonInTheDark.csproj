@@ -63,7 +63,6 @@
     <Compile Include="GameSave.cs" />
     <Compile Include="GameSetup.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="ProgramComplete.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

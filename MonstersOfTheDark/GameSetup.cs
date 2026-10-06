@@ -7,32 +7,29 @@ namespace DragonInTheDark
     {
         public static Position GetNewRandomPosition()
         {
-            Position Position = new Position();
+            Position NewPosition = new Position();
             Random rnd = new Random();
 
             do
             {
-                // (0,0) is rejected because this is the player's
-                // starting position in a new game.
-                Position.X = rnd.Next(0, MAP_HEIGHT);
-                Position.Y = rnd.Next(0, MAP_WIDTH);
+                NewPosition.X = rnd.Next(0, MAP_WIDTH);
+                NewPosition.Y = rnd.Next(0, MAP_HEIGHT);
+            }
+            while (NewPosition.X == 0 && NewPosition.Y == 0);
 
-            } while (Position.X == 0 &&
-                     Position.Y == 0);
-
-            return Position;
+            return NewPosition;
         }
 
         public static void ResetCavern(char[,] Cavern)
         {
-            int Count1;
-            int Count2;
+            int X;
+            int Y;
 
-            for (Count1 = 0; Count1 < MAP_HEIGHT; Count1++)
+            for (X = 0; X < MAP_WIDTH; X++)
             {
-                for (Count2 = 0; Count2 < MAP_WIDTH; Count2++)
+                for (Y = 0; Y < MAP_HEIGHT; Y++)
                 {
-                    Cavern[Count1, Count2] = ' ';
+                    Cavern[X, Y] = ' ';
                 }
             }
         }
@@ -99,22 +96,22 @@ namespace DragonInTheDark
         {
             ResetCavern(Cavern);
 
-            PlayerPosition.X = 2;
-            PlayerPosition.Y = 4;
+            PlayerPosition.X = 4;
+            PlayerPosition.Y = 2;
 
             DragonAwake = false;
 
-            TrapPositions[0].X = 1;
-            TrapPositions[0].Y = 6;
+            TrapPositions[0].X = 6;
+            TrapPositions[0].Y = 1;
 
-            TrapPositions[1].X = 3;
-            TrapPositions[1].Y = 4;
+            TrapPositions[1].X = 4;
+            TrapPositions[1].Y = 3;
 
-            DragonPosition.X = 0;
-            DragonPosition.Y = 3;
+            DragonPosition.X = 3;
+            DragonPosition.Y = 0;
 
-            PortalStonePosition.X = 4;
-            PortalStonePosition.Y = 5;
+            PortalStonePosition.X = 5;
+            PortalStonePosition.Y = 4;
 
             SetUpGame(
                 Cavern,

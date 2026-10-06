@@ -6,10 +6,11 @@ using static DragonInTheDark.GameSave;
 namespace DragonInTheDark
 {
     public struct Position
-        {
-            public int X;
-            public int Y;
-        }
+    {
+        public int X;
+        public int Y;
+    }
+
     class Program
     {
         #region SETTINGS
@@ -24,7 +25,7 @@ namespace DragonInTheDark
         {
             Console.Title = "Dragon in the Dark";
 
-            char[,] Cavern = new char[MAP_HEIGHT, MAP_WIDTH];
+            char[,] Cavern = new char[MAP_WIDTH, MAP_HEIGHT];
             int Choice = 0;
             Boolean DragonAwake = false;
 
@@ -148,19 +149,19 @@ namespace DragonInTheDark
             switch (Direction)
             {
                 case 'W':
-                    PlayerPosition.X -= 1;
-                    break;
-
-                case 'S':
-                    PlayerPosition.X += 1;
-                    break;
-
-                case 'A':
                     PlayerPosition.Y -= 1;
                     break;
 
-                case 'D':
+                case 'S':
                     PlayerPosition.Y += 1;
+                    break;
+
+                case 'A':
+                    PlayerPosition.X -= 1;
+                    break;
+
+                case 'D':
+                    PlayerPosition.X += 1;
                     break;
             }
 
@@ -189,30 +190,28 @@ namespace DragonInTheDark
             switch (Direction)
             {
                 case 'W':
-                    if (PlayerPosition.X == 0)
-                    {
-                        ValidMove = false;
-                    }
-                    break;
-
-                case 'S':
-                    if (PlayerPosition.X ==
-                        MAP_HEIGHT - 1)
-                    {
-                        ValidMove = false;
-                    }
-                    break;
-
-                case 'A':
                     if (PlayerPosition.Y == 0)
                     {
                         ValidMove = false;
                     }
                     break;
 
+                case 'S':
+                    if (PlayerPosition.Y == MAP_HEIGHT - 1)
+                    {
+                        ValidMove = false;
+                    }
+                    break;
+
+                case 'A':
+                    if (PlayerPosition.X == 0)
+                    {
+                        ValidMove = false;
+                    }
+                    break;
+
                 case 'D':
-                    if (PlayerPosition.Y ==
-                        MAP_WIDTH - 1)
+                    if (PlayerPosition.X == MAP_WIDTH - 1)
                     {
                         ValidMove = false;
                     }
