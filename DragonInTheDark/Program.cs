@@ -121,7 +121,10 @@ namespace DragonInTheDark
         {
             int Choice;
 
-            Choice = int.Parse(Console.ReadLine());
+            while (!int.TryParse(Console.ReadLine(), out Choice))
+            {
+                Console.Write("Please enter a menu number: ");
+            }
             Console.WriteLine();
 
             return Choice;
@@ -131,7 +134,13 @@ namespace DragonInTheDark
         {
             char Move;
 
-            Move = char.Parse(Console.ReadLine());
+            string Input = Console.ReadLine();
+            while (String.IsNullOrWhiteSpace(Input) || Input.Trim().Length != 1)
+            {
+                Console.Write("Please enter one letter: ");
+                Input = Console.ReadLine();
+            }
+            Move = Input.Trim()[0];
             Console.WriteLine();
 
             return Char.ToUpper(Move);
@@ -149,19 +158,19 @@ namespace DragonInTheDark
             switch (Direction)
             {
                 case 'W':
-                    PlayerPosition.Y -= 1;
+                    // TODO: Move UP
                     break;
 
                 case 'S':
-                    PlayerPosition.Y += 1;
+                    // TODO: Move DOWN
                     break;
 
                 case 'A':
-                    PlayerPosition.X -= 1;
+                    // TODO: Move LEFT
                     break;
 
                 case 'D':
-                    PlayerPosition.X += 1;
+                    // TODO: Move RIGHT
                     break;
             }
 
@@ -190,31 +199,19 @@ namespace DragonInTheDark
             switch (Direction)
             {
                 case 'W':
-                    if (PlayerPosition.Y == 0)
-                    {
-                        ValidMove = false;
-                    }
+                    // TODO: Can we move up?
                     break;
 
                 case 'S':
-                    if (PlayerPosition.Y == MAP_HEIGHT - 1)
-                    {
-                        ValidMove = false;
-                    }
+                    // TODO: Can we move down?
                     break;
 
                 case 'A':
-                    if (PlayerPosition.X == 0)
-                    {
-                        ValidMove = false;
-                    }
+                    // TODO: Can we move left?
                     break;
 
                 case 'D':
-                    if (PlayerPosition.X == MAP_WIDTH - 1)
-                    {
-                        ValidMove = false;
-                    }
+                    // TODO: Can we move right?
                     break;
             }
 
@@ -270,22 +267,7 @@ namespace DragonInTheDark
             // The dragon has blindsight and always knows
             // where the player is.
 
-            if (DragonPosition.X < PlayerPosition.X)
-            {
-                DragonPosition.X += 1;
-            }
-            else if (DragonPosition.X > PlayerPosition.X)
-            {
-                DragonPosition.X -= 1;
-            }
-            else if (DragonPosition.Y < PlayerPosition.Y)
-            {
-                DragonPosition.Y += 1;
-            }
-            else if (DragonPosition.Y > PlayerPosition.Y)
-            {
-                DragonPosition.Y -= 1;
-            }
+            // TODO: Make the dragon move one cell towards the player.
 
             // Has the dragon stepped on the Portal Stone?
             Boolean DragonMovedToSameCellAsPortalStone = CheckIfSameCell(DragonPosition, PortalStonePosition);
@@ -400,7 +382,7 @@ namespace DragonInTheDark
 
                         // The dragon moves twice for every
                         // one move made by the player.
-                        while (Count < 2 && !Eaten)
+                        while (Count < 2 && !Eaten && !PortalStoneFound)
                         {
                             MakeDragonMove(
                                 Cavern,
@@ -412,6 +394,14 @@ namespace DragonInTheDark
                                 CheckIfSameCell(
                                     DragonPosition,
                                     PlayerPosition);
+
+                            PortalStoneFound = !Eaten && CheckIfSameCell(
+                                PlayerPosition, PortalStonePosition);
+
+                            if (PortalStoneFound)
+                            {
+                                DisplayWonGameMessage();
+                            }
 
                             Console.WriteLine();
                             Console.WriteLine(
