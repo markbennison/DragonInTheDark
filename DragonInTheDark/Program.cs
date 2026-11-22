@@ -155,24 +155,7 @@ namespace DragonInTheDark
                 PlayerPosition.X,
                 PlayerPosition.Y] = ' ';
 
-            switch (Direction)
-            {
-                case 'W':
-                    // TODO: Move UP
-                    break;
-
-                case 'S':
-                    // TODO: Move DOWN
-                    break;
-
-                case 'A':
-                    // TODO: Move LEFT
-                    break;
-
-                case 'D':
-                    // TODO: Move RIGHT
-                    break;
-            }
+            // TODO (Quest 2): Paste your completed movement switch statement here.
 
             Cavern[
                 PlayerPosition.X,
